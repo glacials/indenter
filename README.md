@@ -1,5 +1,7 @@
 # Indenter
 
+[![pypi badge](https://img.shields.io/pypi/v/indenter)](https://pypi.org/project/indenter/)
+
 Indenter is a Python package that assists with programmatically indenting
 text to arbitrary levels using `with` blocks.
 
@@ -87,6 +89,7 @@ To release, first bump the version number in `setup.py`, commit the result,
 then run:
 
 ```sh
+rm -rf dist
 pip install twine
 python setup.py sdist bdist_wheel
 twine check dist/* # optional; check for common issues
