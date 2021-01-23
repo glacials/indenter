@@ -68,7 +68,7 @@ to start at other levels, such as 1:
 ```python
 from indenter import Indenter
 ind = Indenter(start=1)
-print(ind + "First-level indentation)
+print(ind + "First-level indentation")
 with ind:
   print(ind + "Second-level indentation")
 
