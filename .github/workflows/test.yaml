@@ -1,4 +1,5 @@
 steps:
+  - on: [push, pull_request]
   - uses: actions/checkout@v2
   - name: Set up Python
     uses: actions/setup-python@v2
