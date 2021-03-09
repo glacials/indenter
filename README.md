@@ -22,7 +22,7 @@ with Indenter() as ind:
 #   Text to be indented
 ```
 
-You can nest an arbitrary amount of calls:
+You can nest an arbitrary number of calls:
 
 ```python
 from indenter import Indenter
@@ -80,6 +80,14 @@ with ind:
 ## Contributing
 
 I welcome contributions and foster an inclusive environment.
+
+### Testing
+
+Testing requires `pytest` (`pip install pytest`).
+
+```sh
+pytest
+```
 
 ### Releasing
 

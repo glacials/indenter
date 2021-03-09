@@ -1,0 +1,4 @@
+# Development or testing dependencies only! Runtime dependencies should be
+# specified in setup.py so they get installed when users install us.
+
+pytest
