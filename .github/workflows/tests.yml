@@ -13,6 +13,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Test with pytest
+        env:
+          YB_BUCKET: ${{ secrets.YB_BUCKET }}
         run: |
           pip install ${{ secrets.YOURBASE_INSTALL_URL }}
           pytest
