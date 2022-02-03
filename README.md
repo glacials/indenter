@@ -66,7 +66,7 @@ with Indenter() as ind:
 #   Text to be indented
 ```
 
-You can nest an arbitrary number of calls:
+You can nest an arbitrary number of `with` calls:
 
 ```python
 from indenter import Indenter
@@ -98,12 +98,15 @@ func do_work(ind):
 func do_business_logic():
   ind = Indenter()
   logging.debug(ind + "Doing some business logic")
+  do_work(ind + 1)
+  logging.debug(ind + "Finishing some busines logic")
 
 do_some_business_logic()
 
 # Output:
 # Doing some business logic
 #   Doing some work
+# Finishing some busines logic
 ```
 
 ### Customization
@@ -115,7 +118,7 @@ from indenter import Indenter
 
 # Indent with arrows
 with Indenter(symbol="→ ") as ind:
-  print(ind + "I'm indented with a arrow")
+  print(ind + "I'm indented with an arrow")
   with ind:
     print(ind + "I'm indented with two arrows")
 
