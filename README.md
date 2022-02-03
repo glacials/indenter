@@ -3,7 +3,45 @@
 [![pypi badge](https://img.shields.io/pypi/v/indenter)](https://pypi.org/project/indenter/)
 
 Indenter is a Python package that assists with programmatically indenting text to
-arbitrary levels using `with` blocks. It has zero dependencies.
+arbitrary levels using `with` blocks and `+`/`-` operators. It has zero dependencies.
+
+Use Indenter to get easy structured output, even as your control flow weaves through
+multiple functions:
+
+```python
+from indenter import Indenter
+
+def validate_email(ind, email):
+  print(ind + 'Validating email...')
+  # ...
+
+def parse_date(ind, date):
+  print(ind + f'Parsing date {date}')
+  # ...
+  with ind:
+    print(ind + 'Checking components')
+    y, m, d = date.split('-')
+  print(ind + 'Date is valid!')
+
+def get_user_record(ind):
+  print(ind + 'Fetching user from database...')
+  validate_email(ind + 1, 'ben@twos.dev')
+  birthday = parse_date(ind + 1, '1990-08-21')
+  print(ind + 'Fetched user!')
+  # ...
+
+ind = Indenter(symbol='→ ')
+get_user_record(ind)
+```
+Output:
+```plain
+Fetching user from database...
+→ Validating email...
+→ Parsing date 1990-08-21
+→ → Checking components
+→ Date is valid!
+Fetched user!
+```
 
 ## Getting started
 
@@ -45,11 +83,42 @@ with ind:
 #   I'm one level deep again
 ```
 
-The default indentation symbol is two spaces. You can override this by
-passing `symbol`:
+You can manually adjust the indentation level using `+`/`-`. Use this to indent output
+by nested function calls correctly:
+
+```python
+import logging
+from indenter import Indenter
+
+ind = Indenter()
+
+func do_work(ind):
+  logging.debug(ind + "Doing some work")
+
+func do_business_logic():
+  ind = Indenter()
+  logging.debug(ind + "Doing some business logic")
+
+do_some_business_logic()
+
+# Output:
+# Doing some business logic
+#   Doing some work
+```
+
+### Customization
+
+The default indentation symbol is two spaces. You can override this by passing `symbol`:
 
 ```python
 from indenter import Indenter
+
+# Indent with arrows
+with Indenter(symbol="→ ") as ind:
+  print(ind + "I'm indented with a arrow")
+  with ind:
+    print(ind + "I'm indented with two arrows")
+
 # Indent with 4 spaces per level
 with Indenter(symbol="    ") as ind:
   print(ind + "I'm indented by four spaces")
@@ -59,6 +128,8 @@ with Indenter(symbol="\t") as ind:
   print(ind + "I'm indented by one tab")
 
 # Output:
+# → I'm indented by an arrow
+# → → I'm indented by two arrows
 #     I'm indented by four spaces
 # 	I'm indented by one tab
 ```

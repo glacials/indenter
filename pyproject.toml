@@ -1,7 +1,7 @@
 [project]
 name = "indenter"
 version = "1.0.1"
-description = "Indent text using `with` blocks."
+description = "Programmatically indent output the right amount using `with`/`+`/`-`."
 authors = [
     "Ben Carlsson <ben@twos.dev>"
 ]

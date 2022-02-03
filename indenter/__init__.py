@@ -1,3 +1,5 @@
+from copy import deepcopy
+
 class Indenter:
     def __init__(self, start=0, symbol="  "):
         """
@@ -79,10 +81,62 @@ class Indenter:
 
     def __add__(self, other):
         """
-        Allows the `Indenter` to be concatenated with strings like so:
+        Indent the given text, or increase the indentation level by the given amount.
 
-          ind = Indenter()
-          with ind:
-            print(ind + "indented text")
+        If `other` is an `Indenter`, the returned `Indenter` has an indentation level of
+        `self.level + other.level`.
+
+        If `other` is an integer, the returned `Indenter` has an indentation level of
+        `self.level + other`.
+
+        Otherwise, `other` is indented.
+
+        Examples:
+
+        ```python
+        ind = Indenter()
+        str(ind)             # ""
+        str(ind + "abc")     # "abc"
+
+        with ind:
+            str(ind + "abc") # "  abc"
+
+        str(ind + 1)         # "  "
+        str(ind + 1 + "abc") # "  abc"
+        str(ind + 2)         # "    "
+
+        ind_b = ind + 1
+        str(ind + ind_b)     # "  abc"
+        ```
         """
+
+        if isinstance(other, Indenter):
+            new = deepcopy(self)
+            new.level += other.level
+            return new
+        elif isinstance(other, int):
+            new = deepcopy(self)
+            new.level += other
+            return new
+
         return self.__str__() + other
+
+
+    def __sub__(self, other):
+        """
+        Return a new `Indenter` whose indentation level is `other` less than this one's.
+
+        If `other` is an `Indenter`, the returned `Indenter` has an indentation level of
+        `self.level - other.level`.
+
+        If `other` is any other type, the returned `Indenter` has an indentation level
+        of `self.level - other`.
+        """
+        new = deepcopy(self)
+
+        if isinstance(other, Indenter):
+            new.level -= other.level
+        else:
+            new.level -= other
+
+        return new
