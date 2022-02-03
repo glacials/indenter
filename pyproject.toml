@@ -1,6 +1,6 @@
 [project]
 name = "indenter"
-version = "1.0.2"
+version = "1.1.0"
 description = "Programmatically increase and decrease text indentation."
 authors = [
     "Ben Carlsson <ben@twos.dev>"
