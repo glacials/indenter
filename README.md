@@ -93,13 +93,12 @@ pytest
 
 _(mostly notes for myself)_
 
-To release, first bump the version number in `setup.py`, commit the result,
-then run:
+To release, first bump the version number in `setup.cfg`, commit the result, then run:
 
 ```sh
 rm -rf dist
-pip install twine
-python setup.py sdist bdist_wheel
+pip install build twine
+python -m build --wheel
 twine check dist/* # optional; check for common issues
 twine upload dist/*
 ```
