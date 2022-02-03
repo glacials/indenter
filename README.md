@@ -2,10 +2,16 @@
 
 [![pypi badge](https://img.shields.io/pypi/v/indenter)](https://pypi.org/project/indenter/)
 
-Indenter is a Python package that assists with programmatically indenting
-text to arbitrary levels using `with` blocks.
+Indenter is a Python package that assists with programmatically indenting text to
+arbitrary levels using `with` blocks. It has zero dependencies.
 
-## Installation
+## Getting started
+
+### Requirements
+
+- Python 3.6+
+
+### Installing
 
 ```sh
 pip install indenter
